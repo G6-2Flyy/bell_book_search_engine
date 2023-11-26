@@ -2,8 +2,8 @@ const { User } = require('../models');
 
 const resolvers = {
   Query: {
-    classes: async () => {
-      return await Class.find({});
+    me: async () => {
+      return await User.findOne({});
     }
   }
 };

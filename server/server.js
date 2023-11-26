@@ -2,10 +2,10 @@ const express = require('express');
 // Import the ApolloServer class
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
-
 const path = require('path');
 const db = require('./config/connection');
 const routes = require('./routes');
+const {authMiddleware} = require('./utils/auth');
 
 const { resolvers, typeDefs } = require('./schemas');
 
@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware
 });
 
 // if we're in production, serve client/build as static assets
