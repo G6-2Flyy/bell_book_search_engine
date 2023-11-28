@@ -1,10 +1,11 @@
 const { GraphQLError } = require('graphql');
 const { User } = require('../models');
+const {signToken}= require('../utils/auth')
 
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
-            console.log(parent)
+            console.log(context)
             if (context.user) {
                 return await User.findOne({ _id: context.user._id });
             }
